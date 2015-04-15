@@ -3,7 +3,7 @@
 
 
 ## Steps
-1. Use shipping_to_json to create a JSON of the shipping costs for the perks.
+1. Use shipping_to_json.rb to create a JSON of the shipping costs for the perks.
 2. Take the JSON and copy the output to your clipboard
 3. SSH into chiigg01 (or staging) and cd to current, run `bundle exec rails c`
 4. Use import-command.rb to get the rails commands to add or update the shippings costs for a campaign
