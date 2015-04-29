@@ -8,6 +8,6 @@
 3. SSH into chicago indiegogo 01 (or staging) and cd to current, run `bundle exec rails c`
 4. Use import-command.rb to get the rails commands to add or update the shippings costs for a campaign
   - set `p` to the project slug or ID
-  - set `str` to the JSON you copied earlier.  Wrap it in single quotes, front and back. You must escape (use \ )any apostrophes in the perk titles
+  - set `str` to the JSON you copied earlier.  Wrap it in single quotes, front and back. You must escape (use \ ) any apostrophes in the perk titles
   - copy and run the first `JSON.parse(str).each do` block to set the shipping fees.
   - use the bottom `JSON` block for deleting and making new shipping fees (ie. you want to update a perk with existing fees). 
