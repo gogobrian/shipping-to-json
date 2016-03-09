@@ -9,10 +9,10 @@ parsed_file = CSV.read("data.tsv", { :col_sep => "\t", :headers => true})
 perks = []
 
 # starts on the 3rd column (1st perk) and iterates through the columns
-# filling up the hash with the perk name and the country code and prices 
+# filling up the hash with the perk id and the country code and prices
 2.upto(parsed_file.first.length-1) do |i|
 	perk = {
-		name: parsed_file.headers[i],
+		id: parsed_file.headers[i],
 		fees: {}
 	}
 		parsed_file.each do |row|	

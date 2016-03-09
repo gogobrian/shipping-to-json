@@ -1,23 +1,14 @@
 p = Project.find "test-shipping-campaign"
-str = '[{"name":"Ships Worldwide for 10","fees":{"everywhere":10}},
-   {"name":"Ships to US, EU and DE","fees":{"european_union":10,"US":20,"DE":0}},
-   {"name":"Ships to 6 countries and more","fees":{"VI":60,"WF":50,"EH":40,"YE":30,"ZM":20,"ZW":10}}]'
+str = '[{"id":"0001","fees":{"everywhere":"10"}},
+   {"id":"0002","fees":{"european_union":"10","US":"20","DE":"0"}},
+   {"id":"0003","fees":{"VI":"60","WF":"50","EH":"40","YE":"30","ZM":"20","ZW":"10"}}]'
 
 JSON.parse(str).each do |item|
-     perk = p.perks.where(label: item["name"]).last
-     perk.create_shipping(fees: item["fees"].to_json)
-   end
-
-
-
-
-
-
-
-# OR if we want to overwrite all existing PerkShippings for the perks in this list...
-
-JSON.parse(str).each do |item|
-     perk = p.perks.where(label: item["name"]).last
-     perk.shipping.delete if perk.shipping.present?
-     perk.create_shipping(fees: item["fees"].to_json)
-   end
+  perk = p.perks.find(item["id"])
+  perk.shipping.delete if perk.shipping.present?
+  fees = item["fees"]
+  # make sure values are integers. calling to_i on an integer doesn't hurt.
+  fees.each { |key, value| fees[key] = fees[key].to_i }
+  perk.create_shipping(fees: fees.to_json)
+  perk.shipping.save!
+end
